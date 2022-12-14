@@ -19,12 +19,11 @@ evalMove currState [n, from, to] =
         then toMove ++ x
         else x)
     $ zip [1..] currState
-solve startState = foldl evalMove startState
 
 main = do
     input <- getContents
     let [startStateStr, moves] = splitWhen null $ lines input
     let startState = parseState startStateStr
     let moveList = map parseMove moves
-    let finalState = solve startState moveList
+    let finalState = foldl evalMove startState moveList
     putStrLn $ map (head) finalState
